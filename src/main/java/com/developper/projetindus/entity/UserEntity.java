@@ -12,25 +12,35 @@ public class UserEntity {
     @Column(name="id")
     private long id;
 
+
+
     @Column(name = "name")
     private String name;
 
     @Column(name = "surname")
     private String surname;
+
     @Column(name = "instagram")
     private String instagram;
+
     @Column(name = "email")
     private String email;
+
     @Column(name = "password")
     private String password;
+
     @Column(name = "confirmed_account")
     private Boolean confirmed_account;
+
     @Column(name = "dob")
     private Date dob;
+
     @Column(name = "doc")
     private Date doc;
+
     @Column(name = "answered_questions")
     private int answered_questions;
+
     @Column(name = "has_active_session")
     private Boolean has_active_session;
 
