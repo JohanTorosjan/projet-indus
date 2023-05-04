@@ -12,6 +12,7 @@ public class Event {
 
     public float percentage_of_matching;
 
+    public boolean is_a_new_event;
 
 
 }

@@ -35,11 +35,13 @@ public class UsagesQuestionsServiceImpl implements UsagesQuestionsService {
         startingHourQuestion.setQuestion(startingHourQuestionEntity);
         List<AnswerUsagesQuestionsEntity> startingHoursAnswers = new ArrayList<>();
         long j=0;
-        for(int i=0;i<5;i++){
+        for(int i=0;i<4;i++){
             AnswerUsagesQuestionsEntity startingHour = new AnswerUsagesQuestionsEntity();
             LocalDateTime currentDate = LocalDateTime.now();
+            currentDate = currentDate.withMinute(0).withSecond(0).plusHours(1);
             LocalDateTime date = currentDate.plusHours(j);
             startingHour.setLabel(date.toString());
+            startingHour.setId(j);
         //    startingHour.setUsagesQuestions(startingHourQuestionEntity);
             startingHoursAnswers.add(startingHour);
             j=j+2;
