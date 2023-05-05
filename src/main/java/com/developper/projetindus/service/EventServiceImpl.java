@@ -129,7 +129,6 @@ public class EventServiceImpl implements EventService {
         int i = 0;
         for (CategoryEntity userCategory : userCategories) {
             if (infrastructureCategories.contains(userCategory)) {
-                System.out.println(userCategory);
                 percentage += 10;
             }
         }
