@@ -15,7 +15,7 @@ import java.util.Optional;
 public interface QuestionsRepository extends JpaRepository<QuestionsEntity,Long> {
 
 
-    @Query(value = "SELECT * from databaseschema.questions limit 10",nativeQuery = true)
+    @Query(value = "SELECT * from databaseschema.questions order by random() limit 10 ;",nativeQuery = true)
     List<QuestionsEntity> getStarters();
 
     @Modifying
@@ -46,4 +46,8 @@ public interface QuestionsRepository extends JpaRepository<QuestionsEntity,Long>
             "  WHERE aq.id_user = :id_user\n" +
             ")",nativeQuery = true)
     List<QuestionsEntity> getBunchOfQuestions(@Param("id_user") int id_user);
+
+    @Modifying
+    @Query(value = "UPDATE databaseschema.\"user\" SET answered_questions = \"user\".answered_questions + 1 WHERE id = :id\n",nativeQuery = true)
+    void incrementAnsweredQuestions(@Param("id") long id);
 }

@@ -5,12 +5,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 
 public class RatingDTO {
 
-    public String idQuestion;
+    public int idQuestion;
     public Boolean choice;
 
 
     @JsonCreator
-    public RatingDTO(String idQuestion, Boolean choice) {
+    public RatingDTO(int idQuestion, Boolean choice) {
         this.idQuestion = idQuestion;
         this.choice = choice;
     }
@@ -23,11 +23,11 @@ public class RatingDTO {
         this.choice = choice;
     }
 
-    public String getIdQuestion() {
+    public int getIdQuestion() {
         return idQuestion;
     }
 
-    public void setIdQuestion(String idQuestion) {
+    public void setIdQuestion(int idQuestion) {
         this.idQuestion = idQuestion;
     }
 

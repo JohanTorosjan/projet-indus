@@ -1,5 +1,6 @@
 package com.developper.projetindus.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity

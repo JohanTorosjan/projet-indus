@@ -22,6 +22,11 @@ public class EventController {
         return eventService.searchEvent(eventRequestDTO);
     }
 
+    @GetMapping("/{id}")
+    public Event getEvent(@PathVariable long id){
+        return eventService.getEvent(id);
+    }
+
 
 
 }

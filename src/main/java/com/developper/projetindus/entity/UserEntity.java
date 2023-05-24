@@ -12,7 +12,8 @@ public class UserEntity {
     @Column(name="id")
     private long id;
 
-
+    @Column(name="firebase_id")
+    private String firebase_id;
 
     @Column(name = "name")
     private String name;
@@ -59,6 +60,14 @@ public class UserEntity {
         this.doc = doc;
         this.answered_questions = answered_questions;
         this.has_active_session = has_active_session;
+    }
+
+    public String getFirebase_id() {
+        return firebase_id;
+    }
+
+    public void setFirebase_id(String firebase_id) {
+        this.firebase_id = firebase_id;
     }
 
     public long getId() {

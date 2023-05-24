@@ -40,6 +40,7 @@ public class QuestionsServiceImpl implements QuestionsService {
 
     @Override
     public List<QuestionsEntity> getStarters() {
+        System.out.println(questionsRepository.getStarters().get(0).toString());
         return questionsRepository.getStarters();
     }
 
@@ -54,12 +55,14 @@ public class QuestionsServiceImpl implements QuestionsService {
     @Transactional
     @Override
     public SuccesMessageDTO rateUser(String iduser, RatingDTO ratingDTO){
+        System.out.println(ratingDTO.toString());
         int coeff = -1;
         if(ratingDTO.getChoice()){
             coeff = 1;
         }
-        int id_question=Integer.parseInt(ratingDTO.getIdQuestion());
+        int id_question=ratingDTO.getIdQuestion();
         List<Object[]> weightsObjects = questionsRepository.getWeight(id_question);
+        System.out.println(weightsObjects.get(0).toString());
         List<QuestionCategory> categoriesRating = new ArrayList<>();
         for (Object[] result : weightsObjects) {
             QuestionCategory categoryRating = new QuestionCategory();
@@ -75,6 +78,7 @@ public class QuestionsServiceImpl implements QuestionsService {
             questionsRepository.updateNote(Long.parseLong(iduser),(long)rates.getId_category(),user_new_rate);
         }
         questionsRepository.userAnswerSingleQuestion(Integer.parseInt(iduser),id_question);
+        questionsRepository.incrementAnsweredQuestions(Long.parseLong(iduser));
         return new SuccesMessageDTO("success");
 
     }
