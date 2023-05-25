@@ -63,7 +63,7 @@ public class EventServiceImpl implements EventService {
         InfrastructureEntity infrastructureEntity = eventEntity.getInfrastructure();
         Event event = new Event();
        // event.setIs_a_new_event(eventRepository.getNewEventBool(eventEntity.getId()));
-        event.setPercentage_of_matching(eventRepository.getPercentageOfMatching(eventEntity.getId()));
+        event.setPercentage_of_matching(eventRepository.getPercentageOfMatching(eventEntity.getId(),id));
         event.setParticipants(participants);
         event.setStarting_hour(eventEntity.getStarting_acceptation_beginning_hour());
         Infrastructure infrastructure = new Infrastructure(infrastructureEntity.getAdresse(),infrastructureEntity.getName(),infrastructureEntity.getType().getName());
@@ -83,12 +83,14 @@ public class EventServiceImpl implements EventService {
     public Event searchEvent(EventRequestDTO eventRequestDTO) {
         List<InfrastructureEntity> existingInfrastructureEvent = getMatchingInfrastructure(eventRequestDTO.getUsages_questions_answers_ids()[0], eventRequestDTO.getUsages_questions_answers_ids()[2], eventRequestDTO.getUsages_questions_answers_ids()[1]);
         System.out.println("Nombre d'infrastructures proposant un événement matchant :" + existingInfrastructureEvent.size());
+      //  System.out.println(existingInfrastructureEvent.get(0).getName());
         if (existingInfrastructureEvent.isEmpty()) {
             return createEvent(eventRequestDTO);
         }
         List<CategoryEntity> user_categories = getUserMainCategories(eventRequestDTO);
-        List<Float> percentagesOfMatching = getPercentagesOfMatching(existingInfrastructureEvent,user_categories,false);
+        List<Float> percentagesOfMatching = getPercentagesOfMatching(existingInfrastructureEvent,user_categories,true);
         System.out.println(percentagesOfMatching);
+        System.out.println(Collections.max(percentagesOfMatching));
         if(Collections.max(percentagesOfMatching)<50.0){
             return createEvent(eventRequestDTO);
         }
@@ -102,7 +104,7 @@ public class EventServiceImpl implements EventService {
             bestPercentages = getMaxIndexes(percentagesOfMatching);
             return associateToEvent(eventRequestDTO.getUsers_id(),existingInfrastructureEvent.get(bestPercentages.get(0)),percentagesOfMatching.get(bestPercentages.get(0)));
         }
-        //TODO  a la fin :hasactive session devient true pendant 24h
+
     }
 
     ////////////////////////////////////////

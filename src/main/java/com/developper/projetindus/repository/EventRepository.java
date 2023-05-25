@@ -24,8 +24,8 @@ public interface EventRepository extends JpaRepository<EventEntity,Long> {
     @Query(value = "SELECT is_a_new_event from databaseschema.event_users where id_event = :id_event",nativeQuery = true)
     boolean getNewEventBool(@Param("id_event") long id_event);
 
-    @Query(value = "SELECT percentage_of_matching from databaseschema.event_users where id_event = :id_event",nativeQuery = true)
-    int getPercentageOfMatching(@Param("id_event") long id_event);
+    @Query(value = "SELECT percentage_of_matching from databaseschema.event_users where id_event = :id_event and id_user=:id_user",nativeQuery = true)
+    int getPercentageOfMatching(@Param("id_event") long id_event,@Param("id_user") long id_user);
 
 
 

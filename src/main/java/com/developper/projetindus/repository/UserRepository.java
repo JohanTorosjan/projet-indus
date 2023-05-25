@@ -20,7 +20,7 @@ public interface UserRepository extends JpaRepository<UserEntity,Long> {
     @Query(value = "INSERT INTO databaseschema.rating_user (id_user,id_category,note) VALUES (:id_user,:id_category,50)",nativeQuery = true)
     int createAssociation(long id_user,long id_category);
 
-    @Query(value = "SELECT * from databaseschema.user u where u.id IN (SELECT ue.id_user from databaseschema.event_users ue where ue.id_event =id_event );",nativeQuery = true)
+    @Query(value = "SELECT * from databaseschema.user u where u.id IN (SELECT ue.id_user from databaseschema.event_users ue where ue.id_event =:id_event );",nativeQuery = true)
     List<UserEntity> getUsersFromEvent(@Param("id_event")long id_event);
 
     @Modifying
